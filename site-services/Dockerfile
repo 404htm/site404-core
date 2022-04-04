@@ -12,11 +12,11 @@ RUN dotnet restore "site-services/site-services.csproj"
 COPY . .
 WORKDIR "/src/site-services"
 RUN ls
-RUN dotnet build "site-services.csproj" -c Release -o /app/build -o out -r linux-64
+RUN dotnet build "site-services.csproj" -c Release -o /app/build -o out -r linux-x64
 
 FROM build AS publish
 RUN ls
-RUN dotnet publish "site-services.csproj" -c Release -o /app/publish
+RUN dotnet publish "site-services.csproj" -c Release -o /app/publish out -r linux-x64
 
 FROM base AS final
 WORKDIR /app
