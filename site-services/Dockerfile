@@ -8,10 +8,10 @@ EXPOSE 443
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["site-services.csproj", "site-services/"]
-RUN dotnet restore "site-services.csproj"
+RUN dotnet restore "site-services/site-services.csproj"
 COPY . .
 WORKDIR "/src/site-services"
-RUN dotnet build "site-services.csproj" -c Release -o /app/build
+RUN dotnet build "site-services/site-services.csproj" -c Release -o /app/build
 
 FROM build AS publish
 RUN dotnet publish "site-services.csproj" -c Release -o /app/publish
