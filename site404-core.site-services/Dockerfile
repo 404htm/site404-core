@@ -7,8 +7,8 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["site404-core.site-services/site404-core.site-services.csproj", "site404-core.site-services/"]
-RUN dotnet restore "site404-core.site-services/site404-core.site-services.csproj"
+COPY ["site404-core.site-services.csproj", "site404-core.site-services/"]
+RUN dotnet restore "site404-core.site-services.csproj"
 COPY . .
 WORKDIR "/src/site404-core.site-services"
 RUN dotnet build "site404-core.site-services.csproj" -c Release -o /app/build
