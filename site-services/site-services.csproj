@@ -5,7 +5,7 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <RootNamespace>site_services</RootNamespace>
-    <UserSecretsId>f6c80f26-e824-4045-931e-17fc5caf4d02</UserSecretsId>
+    <UserSecretsId>65f54248-2c2b-4070-8558-16ed7c75d1ae</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
   </PropertyGroup>
 
