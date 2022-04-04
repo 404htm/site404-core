@@ -11,10 +11,10 @@ COPY ["site404-core.site-services.csproj", "site-services/"]
 RUN dotnet restore "site-services/site404-core.site-services.csproj"
 COPY . .
 WORKDIR "/src/site404-core.site-services"
-RUN dotnet build "site404-core.site-services.csproj" -c Release -o /app/build
+RUN dotnet build "site-services/site404-core.site-services.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "site404-core.site-services.csproj" -c Release -o /app/publish
+RUN dotnet publish "site-services/site404-core.site-services.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
