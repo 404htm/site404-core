@@ -9,9 +9,11 @@ FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
 COPY ["site-services.csproj", "site-services/"]
 RUN ls
+RUN pwd
 
 RUN dotnet restore "site-services/site-services.csproj"
 RUN ls
+RUN pwd
 
 COPY . .
 WORKDIR "/src/site-services"
