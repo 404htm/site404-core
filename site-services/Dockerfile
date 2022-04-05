@@ -7,26 +7,19 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-CMD echo "Pre-Copy"
-RUN ls
-
-COPY ["site-services/site-services.csproj", "site-services/"]
-RUN echo "Pre-Copy"
+COPY ["site-services.csproj", "site-services/"]
 RUN ls
 
 RUN dotnet restore "site-services/site-services.csproj"
-RUN echo "restore"
 RUN ls
 
 COPY . .
 WORKDIR "/src/site-services"
-RUN echo "build"
 RUN ls
 RUN dotnet build "site-services.csproj" -c Release -o /app/build -a linux-x64
 
 
 FROM build AS publish
-RUN echo "publish"
 RUN ls
 RUN dotnet publish "site-services.csproj" -c Release -o /app/publish --os linux-x64
 
