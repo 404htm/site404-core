@@ -16,12 +16,12 @@ RUN ls
 COPY . .
 WORKDIR "/src/site-services"
 RUN ls
-RUN dotnet build "site-services.csproj" -c Release -o /app/build -a linux-x64
+RUN dotnet build "site-services.csproj" -c Release -o /app/build
 
 
 FROM build AS publish
 RUN ls
-RUN dotnet publish "site-services.csproj" -c Release -o /app/publish --os linux-x64
+RUN dotnet publish "site-services.csproj" -c Release -o /app/publish
 
 FROM base AS final
 WORKDIR /app
