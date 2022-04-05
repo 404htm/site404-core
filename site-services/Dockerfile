@@ -15,8 +15,9 @@ RUN dotnet restore "site-services/site-services.csproj"
 RUN ls
 RUN pwd
 
-COPY . .
 WORKDIR "/src/site-services"
+COPY . .
+
 RUN ls
 RUN pwd
 RUN dotnet build "site-services.csproj" -c Release -o /app/build
