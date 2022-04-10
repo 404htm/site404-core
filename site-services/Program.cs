@@ -19,6 +19,6 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Urls.Add("http://*:8080");
-app.Urls.Add("https://*:443");
+//app.Urls.Add("https://*:443");
 app.Urls.Add("http://*:80");
 app.Run();
