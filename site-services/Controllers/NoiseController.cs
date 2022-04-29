@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using site_services.Extensions;
 using site_services.Services;
 
 namespace site_services.Controllers
@@ -9,6 +10,8 @@ namespace site_services.Controllers
     {
         const double DEFAULT_SCALE = .007;
         const int DEFAULT_SIZE = 200;
+        const int INDEX_X = 0;
+        const int INDEX_Y = 1;
 
         private readonly ILogger<NoiseController> _logger;
 
@@ -28,10 +31,9 @@ namespace site_services.Controllers
             var seed_value = seed??Random.Shared.NextInt64();
             var result = new float[width, height];
 
-            for (int x = 0; x < width; x++) for (int y = 0; y < height; y++)
-                {
-                    result[x, y] = OpenSimplex2.Noise2(seed_value, scale * x, scale * y);
-                }
+            CoordinateExtensions.Range(width, height)
+                .ToList()
+                .ForEach(c => result[c[INDEX_X], c[INDEX_Y]] = OpenSimplex2.Noise2(seed_value, scale * c[INDEX_X], scale * c[INDEX_Y]));
 
             return result;
         }

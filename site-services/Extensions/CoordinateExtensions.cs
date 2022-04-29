@@ -5,7 +5,7 @@
         public static int[][] Range(params int[] dimensions)
         {
             IEnumerable<IEnumerable<int>>? perms = null;
-            if (dimensions.Length <= 0) throw new InvalidOperationException("Set must contain at least one dimension");
+            if (dimensions.Length == 0) throw new InvalidOperationException("Set must contain at least one dimension");
            
             foreach(var dimension in dimensions)
             {
