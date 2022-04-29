@@ -6,8 +6,8 @@
         {
             IEnumerable<IEnumerable<int>>? perms = null;
             if (dimensions.Length == 0) throw new InvalidOperationException("Set must contain at least one dimension");
-           
-            foreach(var dimension in dimensions)
+
+            foreach (var dimension in dimensions)
             {
                 var set = Enumerable.Range(0, dimension);
 
@@ -15,7 +15,7 @@
                 else perms = from a in perms from b in set select CombineSet(a, b);
             }
 
-            return perms?.Select(p => p.ToArray()??Array.Empty<int>()).ToArray()??Array.Empty<int[]>();
+            return perms?.Select(p => p.ToArray() ?? Array.Empty<int>()).ToArray() ?? Array.Empty<int[]>();
         }
 
         private static IEnumerable<T> CombineSet<T>(IEnumerable<T>? set, T element)
