@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using site_services.Services;
 
 namespace site_services.Controllers
 {
@@ -6,14 +7,12 @@ namespace site_services.Controllers
     [Route("Noise")]
     public class NoiseController : ControllerBase
     {
-        private static readonly string[] Summaries = new[]
-        {
-        "Freezing", "Bracing", "Chilly", "Cool", "Mild", "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
-    };
+        const double DEFAULT_SCALE = .007;
+        const int DEFAULT_SIZE = 200;
 
-        private readonly ILogger<WeatherForecastController> _logger;
+        private readonly ILogger<NoiseController> _logger;
 
-        public NoiseController(ILogger<WeatherForecastController> logger)
+        public NoiseController(ILogger<NoiseController> logger)
         {
             _logger = logger;
         }
@@ -21,17 +20,20 @@ namespace site_services.Controllers
         /// <summary>
         /// Generate 2D noise based on the openSimplex Algorithm
         /// </summary>
+        /// <param name="scale">Seed for noise generation - Leave null for Random</param>
         /// <returns>2D Array of Simplex Noise</returns>
         [HttpGet(Name = "GetSimplex2D")]
-        public IEnumerable<WeatherForecast> Get()
+        public float[,] Get(long? seed = null, double scale=.007, int width = DEFAULT_SIZE, int height = DEFAULT_SIZE)
         {
-            return Enumerable.Range(1, 5).Select(index => new WeatherForecast
-            {
-                Date = DateTime.Now.AddDays(index),
-                TemperatureC = Random.Shared.Next(-20, 55),
-                Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-            })
-            .ToArray();
+            var seed_value = seed??Random.Shared.NextInt64();
+            var result = new float[width, height];
+
+            for (int x = 0; x < width; x++) for (int y = 0; y < height; y++)
+                {
+                    result[x, y] = OpenSimplex2.Noise2(seed_value, scale * x, scale * y);
+                }
+
+            return result;
         }
     }
 }

@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32328.378
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "site-services", "site-services\site-services.csproj", "{9A88EFB5-E262-4576-A8CE-5A1D657FB200}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "site-services", "site-services\site-services.csproj", "{9A88EFB5-E262-4576-A8CE-5A1D657FB200}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "site-services.tests", "site-services.tests\site-services.tests.csproj", "{BB5CB618-2368-43F6-934D-EEBA1AE0FE87}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{9A88EFB5-E262-4576-A8CE-5A1D657FB200}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A88EFB5-E262-4576-A8CE-5A1D657FB200}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9A88EFB5-E262-4576-A8CE-5A1D657FB200}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BB5CB618-2368-43F6-934D-EEBA1AE0FE87}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BB5CB618-2368-43F6-934D-EEBA1AE0FE87}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BB5CB618-2368-43F6-934D-EEBA1AE0FE87}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BB5CB618-2368-43F6-934D-EEBA1AE0FE87}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
