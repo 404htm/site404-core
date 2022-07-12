@@ -26,16 +26,21 @@ namespace site_services.Controllers
         /// <param name="scale">Seed for noise generation - Leave null for Random</param>
         /// <returns>2D Array of Simplex Noise</returns>
         [HttpGet(Name = "GetSimplex2D")]
-        public float[,] Get(long? seed = null, double scale=.007, int width = DEFAULT_SIZE, int height = DEFAULT_SIZE)
+        public short[][] Get(long? seed = null, double scale=.007, int width = DEFAULT_SIZE, int height = DEFAULT_SIZE, int range = 1000)
         {
-            var seed_value = seed??Random.Shared.NextInt64();
-            var result = new float[width, height];
+            var seed_value = seed ?? Random.Shared.NextInt64();
+            var result = new int[width, height];
 
-            CoordinateExtensions.Range(width, height)
-                .ToList()
-                .ForEach(c => result[c[INDEX_X], c[INDEX_Y]] = OpenSimplex2.Noise2(seed_value, scale * c[INDEX_X], scale * c[INDEX_Y]));
+            int calculate(int x, int y)
+            {
+                var value = OpenSimplex2.Noise2(seed_value, scale * x, scale * y);
+                return (int)(range + value * .5 * range);
+            }
 
-            return result;
+            return Enumerable.Range(0, height)
+                .Select(x => Enumerable.Range(0, width)
+                    .Select(y => (short)calculate(x, y)).ToArray())
+                .ToArray();
         }
     }
 }
