@@ -1,4 +1,15 @@
+var environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+var isDevelopment = environment == Environments.Development;
+
 var builder = WebApplication.CreateBuilder(args);
+
+if (isDevelopment)
+{
+    builder.Services.AddCors(p => p.AddPolicy("dev", builder =>
+    {
+        builder.WithOrigins("*").AllowAnyMethod().AllowAnyHeader();
+    }));
+}
 
 // Add services to the container.
 
@@ -8,7 +19,16 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddControllers().AddNewtonsoftJson();
 builder.Services.AddSwaggerGen();
 
+
+
+
+
 var app = builder.Build();
+
+if (isDevelopment)
+{
+    app.UseCors("dev");
+}
 
 
 app.UseSwagger();
